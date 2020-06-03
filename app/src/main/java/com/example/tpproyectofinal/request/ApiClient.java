@@ -16,7 +16,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
 public class ApiClient {
-    private static final String PATH="https://localhost:44389/api/";
+    private static final String PATH="http://192.168.0.5:45461/api/";
     private static  MyApiInterface myApiInteface;
     private static String prueba;
 
@@ -36,7 +36,6 @@ public class ApiClient {
     }
 
     public interface MyApiInterface {
-        @FormUrlEncoded
         @POST("propietarios/login")
         Call<String> login(@Body Usuario user);
 
