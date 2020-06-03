@@ -21,13 +21,13 @@ public class ApiClient {
     private static String prueba;
 
     public static MyApiInterface getMyApiClient(){
-        Gson gson = new GsonBuilder().setLenient().create();
-        OkHttpClient.Builder client = new OkHttpClient.Builder();
+        //Gson gson = new GsonBuilder().setLenient().create();
+        //OkHttpClient.Builder client = new OkHttpClient.Builder();
 
         Retrofit retrofit=new Retrofit.Builder()
                 .baseUrl(PATH)
-                .client(client.build())
-                .addConverterFactory(GsonConverterFactory.create(gson))
+                //.client(client.build())
+                .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         myApiInteface=retrofit.create(MyApiInterface.class);
@@ -36,6 +36,7 @@ public class ApiClient {
     }
 
     public interface MyApiInterface {
+
         @POST("propietarios/login")
         Call<String> login(@Body Usuario user);
 
