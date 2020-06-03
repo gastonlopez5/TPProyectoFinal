@@ -21,13 +21,11 @@ public class ApiClient {
     private static String prueba;
 
     public static MyApiInterface getMyApiClient(){
-        //Gson gson = new GsonBuilder().setLenient().create();
-        //OkHttpClient.Builder client = new OkHttpClient.Builder();
+        Gson gson = new GsonBuilder().setLenient().create();
 
         Retrofit retrofit=new Retrofit.Builder()
                 .baseUrl(PATH)
-                //.client(client.build())
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
         myApiInteface=retrofit.create(MyApiInterface.class);
