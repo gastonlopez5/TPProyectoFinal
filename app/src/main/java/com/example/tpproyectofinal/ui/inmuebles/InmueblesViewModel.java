@@ -21,7 +21,7 @@ public class InmueblesViewModel extends ViewModel {
 
     MutableLiveData<ArrayList<Inmueble>> listaInmuebles;
     private ArrayList<Inmueble> lista = new ArrayList<>();
-    private Propietario p = new Propietario("32826861", "Gaston", "López", "gaston@mail.com", "1154008019", "123");
+    private Propietario p = new Propietario(1, "32826861", "Gaston", "López", "gaston@mail.com", "1154008019");
     private TipoInmueble tipo1 =  new TipoInmueble(1, "casa");
     private TipoInmueble tipo2 =  new TipoInmueble(2, "departamento");
 
@@ -34,9 +34,9 @@ public class InmueblesViewModel extends ViewModel {
     }
 
     public void cargarDatos(){
-        lista.add(new Inmueble("Chile 2053", "Residencial", 3, 5000, true, R.drawable.casa1, p.getId(), tipo1.getId(), p, tipo1));
-        lista.add(new Inmueble("Abelardo Figueroa 346", "Privado", 2, 10000, false, R.drawable.casa2, p.getId(), tipo2.getId(), p, tipo2));
-        lista.add(new Inmueble("Chile 2053", "Residencial", 3, 5000, true, R.drawable.casa3, p.getId(), tipo1.getId(), p, tipo1));
+        lista.add(new Inmueble("Chile 2053", "Residencial", 3, 5000, true, R.drawable.casa1, 1, tipo1.getId(), p, tipo1));
+        lista.add(new Inmueble("Abelardo Figueroa 346", "Privado", 2, 10000, false, R.drawable.casa2, 1, tipo2.getId(), p, tipo2));
+        lista.add(new Inmueble("Chile 2053", "Residencial", 3, 5000, true, R.drawable.casa3, 1, tipo1.getId(), p, tipo1));
         listaInmuebles.setValue(lista);
     }
 

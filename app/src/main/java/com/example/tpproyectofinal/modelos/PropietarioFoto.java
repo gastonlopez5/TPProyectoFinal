@@ -1,25 +1,30 @@
 package com.example.tpproyectofinal.modelos;
 
-public class Propietario {
+import android.graphics.Bitmap;
+
+public class PropietarioFoto {
     private int id;
     private String dni;
     private String nombre;
     private String apellido;
     private String email;
     private String telefono;
+    private String ruta;
+    private String clave;
+    private Bitmap bitmap;
 
+    public PropietarioFoto() {
+    }
 
-    public Propietario(int id, String dni, String nombre, String apellido, String email, String telefono) {
+    public PropietarioFoto(int id, String dni, String nombre, String apellido, String email, String telefono, String ruta, String clave) {
         this.id = id;
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
         this.telefono = telefono;
-
-    }
-
-    public Propietario() {
+        this.ruta = ruta;
+        this.clave = clave;
     }
 
     public int getId() {
@@ -70,4 +75,27 @@ public class Propietario {
         this.telefono = telefono;
     }
 
+    public String getRuta() {
+        return ruta;
+    }
+
+    public void setRuta(String ruta) {
+        this.ruta = ruta;
+    }
+
+    public String getClave() {
+        return clave;
+    }
+
+    public void setClave(String clave) {
+        this.clave = clave;
+    }
+
+    public Bitmap getBitmap() {
+        return bitmap;
+    }
+
+    public void setBitmap(Bitmap bitmap) {
+        this.bitmap = bitmap;
+    }
 }

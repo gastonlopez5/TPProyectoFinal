@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ import androidx.navigation.Navigation;
 import com.example.tpproyectofinal.MainActivity;
 import com.example.tpproyectofinal.R;
 import com.example.tpproyectofinal.modelos.Propietario;
+import com.example.tpproyectofinal.modelos.PropietarioFoto;
 import com.example.tpproyectofinal.ui.home.HomeFragment;
 
 
@@ -37,6 +39,7 @@ public class Perfil extends Fragment {
     private EditText etEmail;
     private EditText etClave;
     private Button btEditar;
+    private ImageView ivFoto;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -93,16 +96,18 @@ public class Perfil extends Fragment {
         etEmail = view.findViewById(R.id.etEmail);
         etTelefono = view.findViewById(R.id.etTelefono);
         btEditar = view.findViewById(R.id.btEditar);
+        ivFoto = view.findViewById(R.id.ivFoto);
 
-        vm.getPropietarioLD().observe(getViewLifecycleOwner(), new Observer<Propietario>() {
+        vm.getPropietarioLD().observe(getViewLifecycleOwner(), new Observer<PropietarioFoto>() {
             @Override
-            public void onChanged(Propietario p) {
+            public void onChanged(PropietarioFoto p) {
                 etApellido.setText(p.getApellido());
                 etNombre.setText(p.getNombre());
-                etClave.setText(p.getClave());
                 etDni.setText(p.getDni());
                 etEmail.setText(p.getEmail());
                 etTelefono.setText(p.getTelefono());
+                etClave.setText(p.getClave());
+                ivFoto.setImageBitmap(p.getBitmap());
             }
         });
 

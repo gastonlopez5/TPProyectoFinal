@@ -2,6 +2,7 @@ package com.example.tpproyectofinal.request;
 
 import android.util.Log;
 
+import com.example.tpproyectofinal.modelos.PropietarioFoto;
 import com.example.tpproyectofinal.modelos.Usuario;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -13,12 +14,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 
 public class ApiClient {
-    private static final String PATH="http://192.168.0.5:45461/api/";
+    private static final String PATH="http://192.168.0.5:45455/api/";
     private static  MyApiInterface myApiInteface;
-    private static String prueba;
 
     public static MyApiInterface getMyApiClient(){
         Gson gson = new GsonBuilder().setLenient().create();
@@ -38,8 +40,8 @@ public class ApiClient {
         @POST("propietarios/login")
         Call<String> login(@Body Usuario user);
 
-        // @GET("propietario")
-        //Call<Propietario> leer(@Header("Authorization")String token);
+        @GET("propietarios")
+        Call<PropietarioFoto> perfil(@Header("Authorization") String token);
 
         // @FormUrlEncoded
         // @PUT("propietario/{id}")
