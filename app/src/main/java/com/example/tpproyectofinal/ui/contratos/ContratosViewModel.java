@@ -20,7 +20,7 @@ import java.util.Date;
 
 public class ContratosViewModel extends ViewModel {
 
-    private Propietario p = new Propietario(1, "32826861", "Gaston", "López", "gaston@mail.com", "1154008019");
+    private Propietario p = new Propietario(1, "32826861", "Gaston", "López", "gaston@mail.com", "1154008019", "222");
     private Inquilino i = new Inquilino(1,"50110392", "Thiago", "López", "thiago@mail.com", "2664614213", "chile2053");
     private TipoInmueble tipo1 =  new TipoInmueble(1, "casa");
     private TipoInmueble tipo2 =  new TipoInmueble(2, "departamento");

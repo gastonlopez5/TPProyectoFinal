@@ -4,11 +4,11 @@ import android.graphics.Bitmap;
 
 public class PropietarioFoto {
     private int id;
-    private String dni;
     private String nombre;
     private String apellido;
-    private String email;
     private String telefono;
+    private String email;
+    private String dni;
     private String ruta;
     private String clave;
     private Bitmap bitmap;
@@ -16,13 +16,13 @@ public class PropietarioFoto {
     public PropietarioFoto() {
     }
 
-    public PropietarioFoto(int id, String dni, String nombre, String apellido, String email, String telefono, String ruta, String clave) {
+    public PropietarioFoto(int id, String nombre, String apellido, String telefono, String email, String dni, String ruta, String clave) {
         this.id = id;
-        this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
-        this.email = email;
         this.telefono = telefono;
+        this.email = email;
+        this.dni = dni;
         this.ruta = ruta;
         this.clave = clave;
     }

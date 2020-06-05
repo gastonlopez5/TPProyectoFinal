@@ -24,8 +24,6 @@ public class LoginViewModel extends AndroidViewModel {
     MutableLiveData<String> msg2;
     private Context context;
     private String error1 = "Usuario o Password incorrectos";
-    private String error2 = "Falla en la conección con la API";
-    private String error3 = "Falla en la consulta";
 
     public LoginViewModel(@NonNull Application application) {
         super(application);
@@ -94,4 +92,6 @@ public class LoginViewModel extends AndroidViewModel {
             }
         });
     }
+
+
 }

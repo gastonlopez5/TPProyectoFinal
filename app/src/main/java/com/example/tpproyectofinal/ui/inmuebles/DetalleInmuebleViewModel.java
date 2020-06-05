@@ -22,7 +22,7 @@ public class DetalleInmuebleViewModel extends ViewModel {
     //private ArrayList<Contrato> listaContratos = new ArrayList<>();
     private ArrayList<Contrato> listaContratos = null;
     private TipoInmueble tipo1 =  new TipoInmueble(1, "casa");
-    private Propietario p = new Propietario(1, "32826861", "Gaston", "López", "gaston@mail.com", "1154008019");
+    private Propietario p = new Propietario(1, "32826861", "Gaston", "López", "gaston@mail.com", "1154008019","222");
     private Inmueble inmueble1 = new Inmueble("Chile 2053", "Residencial", 3, 5000, true,R.drawable.casa1, 1, tipo1.getId(), p, tipo1);
     private Inquilino i = new Inquilino(1,"50110392", "Thiago", "López", "thiago@mail.com", "2664614213", "chile2053");
 

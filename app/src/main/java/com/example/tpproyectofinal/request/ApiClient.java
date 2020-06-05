@@ -2,6 +2,7 @@ package com.example.tpproyectofinal.request;
 
 import android.util.Log;
 
+import com.example.tpproyectofinal.modelos.Propietario;
 import com.example.tpproyectofinal.modelos.PropietarioFoto;
 import com.example.tpproyectofinal.modelos.Usuario;
 import com.google.gson.Gson;
@@ -17,6 +18,8 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Path;
 
 public class ApiClient {
     private static final String PATH="http://192.168.0.5:45455/api/";
@@ -41,11 +44,10 @@ public class ApiClient {
         Call<String> login(@Body Usuario user);
 
         @GET("propietarios")
-        Call<PropietarioFoto> perfil(@Header("Authorization") String token);
+        Call<PropietarioFoto> perfil(@Header("Authorization")  String token);
 
-        // @FormUrlEncoded
-        // @PUT("propietario/{id}")
-        //Call<Propietario> actualizar(@Header("Authorization")String token, @Path("id") int groupId, @Field("Nombre")String nombre,@Field("Apellido") String apellido,@Field("Dni") int dni,@Field("Correo")String correo,@Field("Clave")String clave,@Field("EstadoPropietario") int estado,@Field("Telefono")long telefono);
+        @PUT("propietarios")
+        Call<Propietario> actualizar(@Header("Authorization")String token, @Body Propietario p);
         // @GET("test")
         // Call<Data> leer();
 

@@ -1,6 +1,7 @@
 package com.example.tpproyectofinal.ui.perfil;
 
-import android.content.Intent;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,11 +17,9 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
-import com.example.tpproyectofinal.MainActivity;
 import com.example.tpproyectofinal.R;
 import com.example.tpproyectofinal.modelos.Propietario;
 import com.example.tpproyectofinal.modelos.PropietarioFoto;
-import com.example.tpproyectofinal.ui.home.HomeFragment;
 
 
 /**
@@ -32,6 +30,8 @@ import com.example.tpproyectofinal.ui.home.HomeFragment;
 public class Perfil extends Fragment {
 
     private PerfilViewModel vm;
+    private Propietario propietario = null;
+    private PropietarioFoto propietarioFoto = null;
     private EditText etNombre;
     private EditText etApellido;
     private EditText etDni;
@@ -101,13 +101,17 @@ public class Perfil extends Fragment {
         vm.getPropietarioLD().observe(getViewLifecycleOwner(), new Observer<PropietarioFoto>() {
             @Override
             public void onChanged(PropietarioFoto p) {
-                etApellido.setText(p.getApellido());
-                etNombre.setText(p.getNombre());
-                etDni.setText(p.getDni());
-                etEmail.setText(p.getEmail());
-                etTelefono.setText(p.getTelefono());
-                etClave.setText(p.getClave());
-                ivFoto.setImageBitmap(p.getBitmap());
+                propietario = new Propietario(p.getId(), p.getDni(), p.getNombre(), p.getApellido(), p.getEmail(), p.getTelefono(), p.getClave());
+                propietarioFoto = p;
+                fijarDatos(p);
+            }
+        });
+
+        vm.getMsgLD().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                Toast.makeText(getContext(), s, Toast.LENGTH_LONG).show();
+                propietario = new Propietario();
             }
         });
 
@@ -115,7 +119,7 @@ public class Perfil extends Fragment {
 
         btEditar.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
 
                 etNombre.setEnabled(true);
                 etApellido.setEnabled(true);
@@ -125,16 +129,56 @@ public class Perfil extends Fragment {
                 etTelefono.setEnabled(true);
 
                 if (btEditar.getText() == "Guardar"){
-                    Toast.makeText(getContext(), "Datos guardados correctamente", Toast.LENGTH_LONG).show();
-                    Navigation.findNavController(v).navigate(R.id.nav_home);
+
+                    new AlertDialog.Builder(getContext()).setTitle("").setMessage("Desea guardar los datos?").setPositiveButton("SI", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            aceptar();
+                        }
+                    }).setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            fijarDatos(propietarioFoto);
+                        }
+                    }).show();
+
+
+
                 }
                 btEditar.setText("Guardar");
 
             }
+
         });
 
         return view;
     }
 
+    private void fijarDatos(PropietarioFoto p) {
+        etApellido.setText(p.getApellido());
+        etNombre.setText(p.getNombre());
+        etDni.setText(p.getDni());
+        etEmail.setText(p.getEmail());
+        etTelefono.setText(p.getTelefono());
+        etClave.setText("");
+        ivFoto.setImageBitmap(p.getBitmap());
 
+        etNombre.setEnabled(false);
+        etApellido.setEnabled(false);
+        etClave.setEnabled(false);
+        etDni.setEnabled(false);
+        etEmail.setEnabled(false);
+        etTelefono.setEnabled(false);
+        btEditar.setText("Actualizar");
+    }
+
+    private void aceptar() {
+        propietario.setApellido(etApellido.getText().toString());
+        propietario.setNombre(etNombre.getText().toString());
+        propietario.setDni(etDni.getText().toString());
+        propietario.setTelefono(etTelefono.getText().toString());
+        propietario.setEmail(etEmail.getText().toString());
+        propietario.setClave(etClave.getText().toString());
+        vm.actualizarUsuario(propietario);
+    }
 }

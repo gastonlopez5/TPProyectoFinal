@@ -21,7 +21,7 @@ public class InmueblesViewModel extends ViewModel {
 
     MutableLiveData<ArrayList<Inmueble>> listaInmuebles;
     private ArrayList<Inmueble> lista = new ArrayList<>();
-    private Propietario p = new Propietario(1, "32826861", "Gaston", "López", "gaston@mail.com", "1154008019");
+    private Propietario p = new Propietario(1, "32826861", "Gaston", "López", "gaston@mail.com", "1154008019","222");
     private TipoInmueble tipo1 =  new TipoInmueble(1, "casa");
     private TipoInmueble tipo2 =  new TipoInmueble(2, "departamento");
 

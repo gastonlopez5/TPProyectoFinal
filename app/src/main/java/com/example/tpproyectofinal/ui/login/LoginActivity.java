@@ -57,6 +57,7 @@ public class LoginActivity extends AppCompatActivity {
                 vm.validar(email.getText().toString(), password.getText().toString());
             }
         });
+
     }
 
 

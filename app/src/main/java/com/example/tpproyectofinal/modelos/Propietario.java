@@ -7,19 +7,20 @@ public class Propietario {
     private String apellido;
     private String email;
     private String telefono;
+    private String clave;
 
 
-    public Propietario(int id, String dni, String nombre, String apellido, String email, String telefono) {
+    public Propietario() {
+    }
+
+    public Propietario(int id, String dni, String nombre, String apellido, String email, String telefono, String clave) {
         this.id = id;
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
         this.telefono = telefono;
-
-    }
-
-    public Propietario() {
+        this.clave = clave;
     }
 
     public int getId() {
@@ -70,4 +71,11 @@ public class Propietario {
         this.telefono = telefono;
     }
 
+    public String getClave() {
+        return clave;
+    }
+
+    public void setClave(String clave) {
+        this.clave = clave;
+    }
 }
