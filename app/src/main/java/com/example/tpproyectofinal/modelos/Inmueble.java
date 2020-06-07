@@ -6,52 +6,31 @@ import java.text.DecimalFormat;
 public class Inmueble implements Serializable {
     private int id;
     private String direccion;
+    private int tipo;
     private String uso;
     private int ambientes;
-    private int costo;
+    private double costo;
     private Boolean disponible;
-    private int foto;
     private int propietarioId;
-    private int tipoId;
-    private Propietario propietario;
+    private int foto;
+    private Propietario duenio;
     private TipoInmueble tipoInmueble;
 
     public Inmueble() {
     }
 
-    public Inmueble(int id, String direccion, String uso, int ambientes, int costo, Boolean disponible, int propietarioId, int tipoId, Propietario propietario, TipoInmueble tipoInmueble, int foto) {
+    public Inmueble(int id, String direccion, int tipo, String uso, int ambientes, double costo, Boolean disponible, int propietarioId, int foto, Propietario duenio, TipoInmueble tipoInmueble) {
         this.id = id;
         this.direccion = direccion;
+        this.tipo = tipo;
         this.uso = uso;
         this.ambientes = ambientes;
         this.costo = costo;
         this.disponible = disponible;
-        this.foto = foto;
         this.propietarioId = propietarioId;
-        this.tipoId = tipoId;
-        this.propietario = propietario;
-        this.tipoInmueble = tipoInmueble;
-    }
-
-    public Inmueble(String direccion, String uso, int ambientes, int costo, Boolean disponible, int foto, int propietarioId, int tipoId, Propietario propietario, TipoInmueble tipoInmueble) {
-        this.direccion = direccion;
-        this.uso = uso;
-        this.ambientes = ambientes;
-        this.costo = costo;
-        this.disponible = disponible;
         this.foto = foto;
-        this.propietarioId = propietarioId;
-        this.tipoId = tipoId;
-        this.propietario = propietario;
+        this.duenio = duenio;
         this.tipoInmueble = tipoInmueble;
-    }
-
-    public int getFoto() {
-        return foto;
-    }
-
-    public void setFoto(int foto) {
-        this.foto = foto;
     }
 
     public int getId() {
@@ -70,6 +49,14 @@ public class Inmueble implements Serializable {
         this.direccion = direccion;
     }
 
+    public int getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(int tipo) {
+        this.tipo = tipo;
+    }
+
     public String getUso() {
         return uso;
     }
@@ -86,11 +73,11 @@ public class Inmueble implements Serializable {
         this.ambientes = ambientes;
     }
 
-    public int getCosto() {
+    public double getCosto() {
         return costo;
     }
 
-    public void setCosto(int costo) {
+    public void setCosto(double costo) {
         this.costo = costo;
     }
 
@@ -110,20 +97,20 @@ public class Inmueble implements Serializable {
         this.propietarioId = propietarioId;
     }
 
-    public int getTipoId() {
-        return tipoId;
+    public int getFoto() {
+        return foto;
     }
 
-    public void setTipoId(int tipoId) {
-        this.tipoId = tipoId;
+    public void setFoto(int foto) {
+        this.foto = foto;
     }
 
-    public Propietario getPropietario() {
-        return propietario;
+    public Propietario getDuenio() {
+        return duenio;
     }
 
-    public void setPropietario(Propietario propietario) {
-        this.propietario = propietario;
+    public void setDuenio(Propietario duenio) {
+        this.duenio = duenio;
     }
 
     public TipoInmueble getTipoInmueble() {
