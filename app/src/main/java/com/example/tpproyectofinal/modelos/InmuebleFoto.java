@@ -2,7 +2,9 @@ package com.example.tpproyectofinal.modelos;
 
 import android.graphics.Bitmap;
 
-public class InmuebleFoto {
+import java.io.Serializable;
+
+public class InmuebleFoto implements Serializable {
     private Inmueble inmueble;
     private String ruta;
     private Bitmap bitmap;

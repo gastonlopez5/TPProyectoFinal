@@ -24,9 +24,9 @@ public class ContratosViewModel extends ViewModel {
     private Inquilino i = new Inquilino(1,"50110392", "Thiago", "López", "thiago@mail.com", "2664614213", "chile2053");
     private TipoInmueble tipo1 =  new TipoInmueble(1, "casa");
     private TipoInmueble tipo2 =  new TipoInmueble(2, "departamento");
-    private Inmueble inmueble1 = new Inmueble("Chile 2053", "Residencial", 3, 5000, true,R.drawable.casa1, 1, tipo1.getId(), p, tipo1);
-    private Inmueble inmueble2 = new Inmueble("Abelardo Figueroa 346", "Privado", 2, 10000, false, R.drawable.casa2, 1, tipo2.getId(), p, tipo2);
-    private Inmueble inmueble3 =new Inmueble("Chile 2053", "Residencial", 3, 5000, true, R.drawable.casa3, 1, tipo1.getId(), p, tipo1);
+    private Inmueble inmueble1 = new Inmueble(1,"Chile 2053", 1, "aaaa", 5000, 2,true, 1, 2, p, tipo1);
+    private Inmueble inmueble2 = new Inmueble(1,"Chile 2053", 1, "aaaa", 5000, 2,true, 1, 2, p, tipo1);
+    private Inmueble inmueble3 =new Inmueble(1,"Chile 2053", 1, "aaaa", 5000, 2,true, 1, 2, p, tipo1);
     private ArrayList<Contrato> lista = new ArrayList<>();
 
     private MutableLiveData<ArrayList<Contrato>> listaMLD;

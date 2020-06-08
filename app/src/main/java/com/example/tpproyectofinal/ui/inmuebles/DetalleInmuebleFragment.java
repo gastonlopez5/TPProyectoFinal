@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.tpproyectofinal.R;
 import com.example.tpproyectofinal.modelos.Inmueble;
+import com.example.tpproyectofinal.modelos.InmuebleFoto;
 
 
 /**
@@ -88,15 +89,15 @@ public class DetalleInmuebleFragment extends Fragment {
 
         vm = ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(DetalleInmuebleViewModel.class);
 
-        vm.getInmueble().observe(getViewLifecycleOwner(), new Observer<Inmueble>() {
+        vm.getInmueble().observe(getViewLifecycleOwner(), new Observer<InmuebleFoto>() {
             @Override
-            public void onChanged(Inmueble inmueble) {
-                foto.setImageResource(inmueble.getFoto());
-                tvUso.setText(inmueble.getUso());
-                tvDireccion.setText(inmueble.getDireccion());
-                tvCosto.setText(""+inmueble.getCosto());
-                tvAmbientes.setText(""+inmueble.getAmbientes());
-                cbDisponible.setChecked(inmueble.getDisponible());
+            public void onChanged(InmuebleFoto inmueble) {
+                //foto.setImageResource(inmueble.getFoto());
+                tvUso.setText(inmueble.getInmueble().getUso());
+                tvDireccion.setText(inmueble.getInmueble().getDireccion());
+                tvCosto.setText(""+inmueble.getInmueble().getCosto());
+                tvAmbientes.setText(""+inmueble.getInmueble().getAmbientes());
+                cbDisponible.setChecked(inmueble.getInmueble().getDisponible());
 
 
             }
@@ -112,9 +113,9 @@ public class DetalleInmuebleFragment extends Fragment {
         });
 
         Bundle objetoInmueble = getArguments();
-        Inmueble inmueble = null;
+        InmuebleFoto inmueble = null;
         if(objetoInmueble!=null){
-            inmueble = (Inmueble) objetoInmueble.getSerializable("objeto");
+            inmueble = (InmuebleFoto) objetoInmueble.getSerializable("objeto");
 
             vm.setInmueble(inmueble);
         }

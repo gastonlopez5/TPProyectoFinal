@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.tpproyectofinal.R;
 import com.example.tpproyectofinal.modelos.Inmueble;
+import com.example.tpproyectofinal.modelos.InmuebleFoto;
 import com.example.tpproyectofinal.modelos.Propietario;
 import com.example.tpproyectofinal.modelos.TipoInmueble;
 
@@ -83,16 +84,16 @@ public class InmueblesFragment extends Fragment {
 
         vm = ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(InmueblesViewModel.class);
 
-        vm.getListaInmuebles().observe(getViewLifecycleOwner(), new Observer<ArrayList<Inmueble>>() {
+        vm.getListaInmuebles().observe(getViewLifecycleOwner(), new Observer<ArrayList<InmuebleFoto>>() {
             @Override
-            public void onChanged(final ArrayList<Inmueble> inmuebles) {
-                AdaptadorInmueble adaptador = new AdaptadorInmueble(inmuebles);
+            public void onChanged(final ArrayList<InmuebleFoto> inmuebles) {
+                AdaptadorInmueble adaptador = new AdaptadorInmueble(inmuebles, getContext());
 
                 adaptador.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Inmueble inmueble = inmuebles.get(recyclerView.getChildAdapterPosition(v));
-                        Toast.makeText(getContext(), "Selección: "+ inmueble.getDireccion(),
+                        InmuebleFoto inmueble = inmuebles.get(recyclerView.getChildAdapterPosition(v));
+                        Toast.makeText(getContext(), "Selección: "+ inmueble.getInmueble().getDireccion(),
                                 Toast.LENGTH_SHORT).show();
 
 
