@@ -2,6 +2,7 @@ package com.example.tpproyectofinal.request;
 
 import android.util.Log;
 
+import com.example.tpproyectofinal.modelos.Contrato;
 import com.example.tpproyectofinal.modelos.InmuebleFoto;
 import com.example.tpproyectofinal.modelos.Propietario;
 import com.example.tpproyectofinal.modelos.PropietarioFoto;
@@ -55,6 +56,9 @@ public class ApiClient {
 
         @GET("inmuebles")
         Call<ArrayList<InmuebleFoto>> listarInmuebles(@Header("Authorization")  String token);
+
+        @GET("contratos/{id}")
+        Call<ArrayList<Contrato>> listarContratos(@Header("Authorization")  String token, @Path("id") int InmuebleId);
 
         //listarClientes.php
         //@GET("listarClientes.php")

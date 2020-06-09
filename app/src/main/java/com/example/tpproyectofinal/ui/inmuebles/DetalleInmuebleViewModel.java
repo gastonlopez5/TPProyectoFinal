@@ -1,5 +1,12 @@
 package com.example.tpproyectofinal.ui.inmuebles;
 
+import android.app.Application;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -11,21 +18,28 @@ import com.example.tpproyectofinal.modelos.InmuebleFoto;
 import com.example.tpproyectofinal.modelos.Inquilino;
 import com.example.tpproyectofinal.modelos.Propietario;
 import com.example.tpproyectofinal.modelos.TipoInmueble;
+import com.example.tpproyectofinal.request.ApiClient;
 
 import java.util.ArrayList;
 
-public class DetalleInmuebleViewModel extends ViewModel {
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class DetalleInmuebleViewModel extends AndroidViewModel {
 
     MutableLiveData<InmuebleFoto> inmuebleVM;
     MutableLiveData<Integer> flag;
+    private Context context;
     private int cont = 0;
 
     //private ArrayList<Contrato> listaContratos = new ArrayList<>();
     private ArrayList<Contrato> listaContratos = null;
-    private TipoInmueble tipo1 =  new TipoInmueble(1, "casa");
-    private Propietario p = new Propietario(1, "32826861", "Gaston", "López", "gaston@mail.com", "1154008019","222");
-    private Inmueble inmueble1 = new Inmueble(1,"Chile 2053", 1, "aaaa", 5000, 2,true, 1, 2, p, tipo1);
-    private Inquilino i = new Inquilino(1,"50110392", "Thiago", "López", "thiago@mail.com", "2664614213", "chile2053");
+
+    public DetalleInmuebleViewModel(@NonNull Application application) {
+        super(application);
+        context = application.getApplicationContext();
+    }
 
     public LiveData<InmuebleFoto> getInmueble(){
         if (inmuebleVM==null){
@@ -41,17 +55,38 @@ public class DetalleInmuebleViewModel extends ViewModel {
         return flag;
     }
 
-    public void setInmueble(InmuebleFoto inmueble){
-        // Con el id del inmueble busco si tiene contratos y el tamaño de listaContratos es != de 0
-        // si tiene contratos por lo que modifica el observable flag que luego desabilita la opcion
-        // de cambiar la disponibilidad del inmueble
+    public void setInmueble(InmuebleFoto i){
+        Call<ArrayList<Contrato>> dato= ApiClient.getMyApiClient().listarContratos(obtenerToken(), i.getInmueble().getId());
+        dato.enqueue(new Callback<ArrayList<Contrato>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Contrato>> call, Response<ArrayList<Contrato>> response) {
+                if (response.isSuccessful()){
+                    listaContratos = response.body();
 
-        listaContratos = new ArrayList<>();
-        listaContratos.add(new Contrato("13-05-2019", "13-05-2021", 10000, "33766055", "Cuevas Gabriela", "2664614213", "gabriela@mail.com", i.getId(), inmueble1.getId(), i, inmueble1));
-        if (listaContratos.size() != 0){
-            flag.setValue(cont + 1);
-            cont = 0;
-        }
-        inmuebleVM.setValue(inmueble);
+                    if (listaContratos.size() != 0){
+                        flag.setValue(cont + 1);
+                        cont = 0;
+                    }
+
+                } else {
+                    Toast.makeText(context, response.errorBody().toString(), Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Contrato>> call, Throwable t) {
+                Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+        inmuebleVM.setValue(i);
+    }
+
+    private String obtenerToken(){
+        SharedPreferences sp = context.getSharedPreferences("token",0);
+        String token = sp.getString("token","-1");
+        String tokenFull = "Bearer " + token;
+
+        return  tokenFull;
     }
 }

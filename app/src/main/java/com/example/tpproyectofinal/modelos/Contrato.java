@@ -9,7 +9,7 @@ public class Contrato implements Serializable {
     private int id;
     private String fechaInicio;
     private String fechaFin;
-    private int inporte;
+    private double inporte;
     private String dniGarante;
     private String nombreCompletoGarante;
     private String telefonoGarante;
@@ -22,22 +22,8 @@ public class Contrato implements Serializable {
     public Contrato() {
     }
 
-    public Contrato(int id, String fechaInicio, String fechaFin, int inporte, String dniGarante, String nombreCompletoGarante, String telefonoGarante, String emailGarante, int inquilinoId, int inmuebleId, Inquilino inquilino, Inmueble inmueble) {
+    public Contrato(int id, String fechaInicio, String fechaFin, double inporte, String dniGarante, String nombreCompletoGarante, String telefonoGarante, String emailGarante, int inquilinoId, int inmuebleId, Inquilino inquilino, Inmueble inmueble) {
         this.id = id;
-        this.fechaInicio = fechaInicio;
-        this.fechaFin = fechaFin;
-        this.inporte = inporte;
-        this.dniGarante = dniGarante;
-        this.nombreCompletoGarante = nombreCompletoGarante;
-        this.telefonoGarante = telefonoGarante;
-        this.emailGarante = emailGarante;
-        this.inquilinoId = inquilinoId;
-        this.inmuebleId = inmuebleId;
-        this.inquilino = inquilino;
-        this.inmueble = inmueble;
-    }
-
-    public Contrato(String fechaInicio, String fechaFin, int inporte, String dniGarante, String nombreCompletoGarante, String telefonoGarante, String emailGarante, int inquilinoId, int inmuebleId, Inquilino inquilino, Inmueble inmueble) {
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.inporte = inporte;
@@ -75,11 +61,11 @@ public class Contrato implements Serializable {
         this.fechaFin = fechaFin;
     }
 
-    public int getInporte() {
+    public double getInporte() {
         return inporte;
     }
 
-    public void setInporte(int inporte) {
+    public void setInporte(double inporte) {
         this.inporte = inporte;
     }
 

@@ -41,9 +41,9 @@ public class ContratosViewModel extends ViewModel {
 
 
     public void cargarContratos(){
-        lista.add(new Contrato("13-05-2019", "13-05-2021", 10000, "33766055", "Cuevas Gabriela", "2664614213", "gabriela@mail.com", i.getId(), inmueble1.getId(), i, inmueble1));
-        lista.add(new Contrato("13-05-2018", "13-05-2022", 15000, "33766055", "Cuevas Gabriela", "2664614213", "gabriela@mail.com", i.getId(), inmueble1.getId(), i, inmueble2));
-        lista.add(new Contrato("13-05-2018", "13-08-2023", 35000, "33766055", "Cuevas Gabriela", "2664614213", "gabriela@mail.com", i.getId(), inmueble3.getId(), i, inmueble3));
+        lista.add(new Contrato(1,"13-05-2019", "13-05-2021", 10000.0, "33766055", "Cuevas Gabriela", "2664614213", "gabriela@mail.com", i.getId(), inmueble1.getId(), i, inmueble1));
+        lista.add(new Contrato(1,"13-05-2018", "13-05-2022", 15000, "33766055", "Cuevas Gabriela", "2664614213", "gabriela@mail.com", i.getId(), inmueble1.getId(), i, inmueble2));
+        lista.add(new Contrato(1,"13-05-2018", "13-08-2023", 35000, "33766055", "Cuevas Gabriela", "2664614213", "gabriela@mail.com", i.getId(), inmueble3.getId(), i, inmueble3));
         listaMLD.setValue(lista);
     }
 }
