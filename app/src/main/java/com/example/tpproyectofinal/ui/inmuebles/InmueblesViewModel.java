@@ -37,7 +37,6 @@ public class InmueblesViewModel extends AndroidViewModel {
     private ArrayList<InmuebleFoto> listaInmueblesFoto = new ArrayList<>();
     private ArrayList<String> listaUrls= new ArrayList<>();
     private Bitmap bitmap;
-    private String PATH="http://192.168.0.7:45455";
 
     public InmueblesViewModel(@NonNull Application application) {
         super(application);

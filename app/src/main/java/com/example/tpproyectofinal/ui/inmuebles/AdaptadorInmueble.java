@@ -23,6 +23,7 @@ public class AdaptadorInmueble extends RecyclerView.Adapter<AdaptadorInmueble.Vi
     private ArrayList<InmuebleFoto> lista;
     private View.OnClickListener listener;
     private Context context;
+    private String PATH="http://192.168.1.102:45455";
 
     public AdaptadorInmueble(ArrayList<InmuebleFoto> lista, Context context) {
         this.lista = lista;
@@ -76,7 +77,7 @@ public class AdaptadorInmueble extends RecyclerView.Adapter<AdaptadorInmueble.Vi
 
         public void asignarDatos(InmuebleFoto inmuebleFoto) {
             Glide.with(context)
-                    .load("http://192.168.0.7:45455" + inmuebleFoto.getRuta())
+                    .load(PATH + inmuebleFoto.getRuta())
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(foto);
 
