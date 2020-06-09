@@ -16,6 +16,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.tpproyectofinal.R;
 import com.example.tpproyectofinal.modelos.Inmueble;
 import com.example.tpproyectofinal.modelos.InmuebleFoto;
@@ -33,6 +35,7 @@ public class DetalleInmuebleFragment extends Fragment {
     private CheckBox cbDisponible;
     private Button btEditar;
     private DetalleInmuebleViewModel vm;
+    private String PATH="http://192.168.1.102:45455";
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -92,14 +95,16 @@ public class DetalleInmuebleFragment extends Fragment {
         vm.getInmueble().observe(getViewLifecycleOwner(), new Observer<InmuebleFoto>() {
             @Override
             public void onChanged(InmuebleFoto inmueble) {
+                Glide.with(getContext())
+                        .load(PATH + inmueble.getRuta())
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .into(foto);
                 //foto.setImageResource(inmueble.getFoto());
                 tvUso.setText(inmueble.getInmueble().getUso());
                 tvDireccion.setText(inmueble.getInmueble().getDireccion());
                 tvCosto.setText(""+inmueble.getInmueble().getCosto());
                 tvAmbientes.setText(""+inmueble.getInmueble().getAmbientes());
                 cbDisponible.setChecked(inmueble.getInmueble().getDisponible());
-
-
             }
         });
 
