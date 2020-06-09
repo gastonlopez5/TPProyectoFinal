@@ -1,5 +1,7 @@
 package com.example.tpproyectofinal.ui.inmuebles;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,9 +12,12 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +26,9 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.tpproyectofinal.R;
 import com.example.tpproyectofinal.modelos.Inmueble;
 import com.example.tpproyectofinal.modelos.InmuebleFoto;
+import com.example.tpproyectofinal.modelos.TipoInmueble;
+
+import java.util.ArrayList;
 
 
 /**
@@ -31,10 +39,13 @@ import com.example.tpproyectofinal.modelos.InmuebleFoto;
 public class DetalleInmuebleFragment extends Fragment {
 
     private ImageView foto;
-    private TextView tvDireccion, tvCosto, tvUso, tvAmbientes;
+    private Spinner spTipo;
+    private EditText tvDireccion, tvCosto, tvUso, tvAmbientes, tvTipo;
     private CheckBox cbDisponible;
-    private Button btEditar;
+    private Button btEditar, btEliminar;
     private DetalleInmuebleViewModel vm;
+    private InmuebleFoto inmuebleFotoVisto = null;
+    private Inmueble inmueble = null;
     private String PATH="http://192.168.1.102:45455";
 
     // TODO: Rename parameter arguments, choose names that match
@@ -87,26 +98,36 @@ public class DetalleInmuebleFragment extends Fragment {
         tvCosto = view.findViewById(R.id.tvCosto);
         tvDireccion = view.findViewById(R.id.tvDireccion);
         tvUso = view.findViewById(R.id.tvUso);
+        tvTipo = view.findViewById(R.id.tvTipo);
+        spTipo = view.findViewById(R.id.spTipo);
         cbDisponible = view.findViewById(R.id.cbDisponible);
         btEditar = view.findViewById(R.id.btEditar);
+        btEliminar = view.findViewById(R.id.btEliminar);
 
         vm = ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(DetalleInmuebleViewModel.class);
 
-        vm.getInmueble().observe(getViewLifecycleOwner(), new Observer<InmuebleFoto>() {
+        vm.getTiposInmuebles().observe(getViewLifecycleOwner(), new Observer<ArrayList<TipoInmueble>>() {
             @Override
-            public void onChanged(InmuebleFoto inmueble) {
-                Glide.with(getContext())
-                        .load(PATH + inmueble.getRuta())
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .into(foto);
-                //foto.setImageResource(inmueble.getFoto());
-                tvUso.setText(inmueble.getInmueble().getUso());
-                tvDireccion.setText(inmueble.getInmueble().getDireccion());
-                tvCosto.setText(""+inmueble.getInmueble().getCosto());
-                tvAmbientes.setText(""+inmueble.getInmueble().getAmbientes());
-                cbDisponible.setChecked(inmueble.getInmueble().getDisponible());
+            public void onChanged(ArrayList<TipoInmueble> tipoInmuebles) {
+                ArrayAdapter<TipoInmueble> adapter = new ArrayAdapter<TipoInmueble>(getContext(), android.R.layout.simple_spinner_item, tipoInmuebles);
+                spTipo.setAdapter(adapter);
             }
         });
+
+        vm.getInmueble().observe(getViewLifecycleOwner(), new Observer<InmuebleFoto>() {
+            @Override
+            public void onChanged(InmuebleFoto inmuebleFoto) {
+                inmueble = new Inmueble(inmuebleFoto.getInmueble().getId(), inmuebleFoto.getInmueble().getDireccion(),
+                        inmuebleFoto.getInmueble().getTipo(), inmuebleFoto.getInmueble().getUso(), inmuebleFoto.getInmueble().getAmbientes(),
+                        inmuebleFoto.getInmueble().getCosto(), inmuebleFoto.getInmueble().getDisponible(), inmuebleFoto.getInmueble().getPropietarioId(),
+                        inmuebleFoto.getInmueble().getDuenio(), inmuebleFoto.getInmueble().getTipoInmueble());
+                inmuebleFotoVisto = inmuebleFoto;
+                vm.obtenerTiposInmuebles();
+                fijarDatos(inmuebleFoto);
+            }
+        });
+
+
 
         vm.getFlag().observe(getViewLifecycleOwner(), new Observer<Integer>() {
             @Override
@@ -127,11 +148,85 @@ public class DetalleInmuebleFragment extends Fragment {
 
         btEditar.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.nav_inmuebles);
+            public void onClick(final View v) {
+                tvUso.setEnabled(true);
+                tvAmbientes.setEnabled(true);
+                tvCosto.setEnabled(true);
+                tvDireccion.setEnabled(true);
+                tvTipo.setVisibility(v.INVISIBLE);
+                spTipo.setVisibility(v.VISIBLE);
+
+                if (btEditar.getText() == "Guardar"){
+
+                    new AlertDialog.Builder(getContext()).setTitle("").setMessage("Desea guardar los datos?").setPositiveButton("SI", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            aceptar();
+                            Navigation.findNavController(v).navigate(R.id.nav_home);
+                        }
+                    }).setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            fijarDatos(inmuebleFotoVisto);
+                        }
+                    }).show();
+                }
+                btEditar.setText("Guardar");
+
+            }
+        });
+
+        btEliminar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                new AlertDialog.Builder(getContext()).setTitle("").setMessage("Esta seguro que quiere eliminar el inmueble?").setPositiveButton("SI", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        vm.eliminarInmueble(inmuebleFotoVisto.getInmueble().getId());
+                        Navigation.findNavController(v).navigate(R.id.nav_home);
+                    }
+                }).setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        fijarDatos(inmuebleFotoVisto);
+                    }
+                }).show();
+
             }
         });
 
         return view;
+    }
+
+    private void fijarDatos(InmuebleFoto inmueble) {
+
+        Glide.with(getContext())
+                .load(PATH + inmueble.getRuta())
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(foto);
+
+        tvUso.setText(inmueble.getInmueble().getUso());
+        tvDireccion.setText(inmueble.getInmueble().getDireccion());
+        tvCosto.setText(""+inmueble.getInmueble().getCosto());
+        tvTipo.setText(inmueble.getInmueble().getTipoInmueble().getTipo());
+        tvAmbientes.setText(""+inmueble.getInmueble().getAmbientes());
+        cbDisponible.setChecked(inmueble.getInmueble().getDisponible());
+
+        tvDireccion.setEnabled(false);
+        tvCosto.setEnabled(false);
+        tvAmbientes.setEnabled(false);
+        tvUso.setEnabled(false);
+        tvTipo.setEnabled(false);
+        btEditar.setText("Actualizar");
+    }
+
+    private void aceptar() {
+        TipoInmueble seleccion = (TipoInmueble) spTipo.getSelectedItem();
+        inmueble.setAmbientes(Integer.parseInt(tvAmbientes.getText().toString()));
+        inmueble.setCosto(Double.parseDouble(tvCosto.getText().toString()));
+        inmueble.setDireccion(tvDireccion.getText().toString());
+        inmueble.setDisponible(cbDisponible.isChecked());
+        inmueble.setTipoInmueble(seleccion);
+        vm.actualizarInmueble(inmueble);
     }
 }

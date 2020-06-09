@@ -2,6 +2,7 @@ package com.example.tpproyectofinal.ui.inmuebles;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.widget.Toast;
 
@@ -11,6 +12,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.tpproyectofinal.MainActivity;
 import com.example.tpproyectofinal.R;
 import com.example.tpproyectofinal.modelos.Contrato;
 import com.example.tpproyectofinal.modelos.Inmueble;
@@ -29,6 +31,7 @@ import retrofit2.Response;
 public class DetalleInmuebleViewModel extends AndroidViewModel {
 
     MutableLiveData<InmuebleFoto> inmuebleVM;
+    MutableLiveData<ArrayList<TipoInmueble>> tiposInmueblesVM;
     MutableLiveData<Integer> flag;
     private Context context;
     private int cont = 0;
@@ -46,6 +49,13 @@ public class DetalleInmuebleViewModel extends AndroidViewModel {
             inmuebleVM = new MutableLiveData<InmuebleFoto>();
         }
         return inmuebleVM;
+    }
+
+    public LiveData<ArrayList<TipoInmueble>> getTiposInmuebles(){
+        if (tiposInmueblesVM==null){
+            tiposInmueblesVM = new MutableLiveData<ArrayList<TipoInmueble>>();
+        }
+        return tiposInmueblesVM;
     }
 
     public LiveData<Integer> getFlag(){
@@ -80,6 +90,64 @@ public class DetalleInmuebleViewModel extends AndroidViewModel {
         });
 
         inmuebleVM.setValue(i);
+    }
+
+    public void actualizarInmueble(Inmueble i){
+        Call<Inmueble> dato= ApiClient.getMyApiClient().actualizarInmueble(obtenerToken(), i);
+        dato.enqueue(new Callback<Inmueble>() {
+            @Override
+            public void onResponse(Call<Inmueble> call, Response<Inmueble> response) {
+                if (response.isSuccessful()){
+                    Toast.makeText(context, "Datos guardados correctamente!", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(context, response.errorBody().toString(), Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Inmueble> call, Throwable t) {
+                Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    public void eliminarInmueble(int id){
+        Call<Inmueble> dato= ApiClient.getMyApiClient().eliminarInmueble(obtenerToken(), id);
+        dato.enqueue(new Callback<Inmueble>() {
+            @Override
+            public void onResponse(Call<Inmueble> call, Response<Inmueble> response) {
+                if (response.isSuccessful()){
+                    Toast.makeText(context, "Inmueble eliminado correctamente!", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(context, response.errorBody().toString(), Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Inmueble> call, Throwable t) {
+                Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    public void obtenerTiposInmuebles(){
+        Call<ArrayList<TipoInmueble>> dato= ApiClient.getMyApiClient().tiposInmuebles(obtenerToken());
+        dato.enqueue(new Callback<ArrayList<TipoInmueble>>() {
+            @Override
+            public void onResponse(Call<ArrayList<TipoInmueble>> call, Response<ArrayList<TipoInmueble>> response) {
+                if (response.isSuccessful()){
+                    tiposInmueblesVM.postValue(response.body());
+                } else {
+                    Toast.makeText(context, response.errorBody().toString(), Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<TipoInmueble>> call, Throwable t) {
+                Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
+                t.printStackTrace();
+            }
+        });
     }
 
     private String obtenerToken(){

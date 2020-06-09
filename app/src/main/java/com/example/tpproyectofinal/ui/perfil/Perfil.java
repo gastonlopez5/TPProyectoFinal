@@ -2,6 +2,7 @@ package com.example.tpproyectofinal.ui.perfil;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,7 @@ import androidx.navigation.Navigation;
 import com.example.tpproyectofinal.R;
 import com.example.tpproyectofinal.modelos.Propietario;
 import com.example.tpproyectofinal.modelos.PropietarioFoto;
+import com.example.tpproyectofinal.ui.login.LoginActivity;
 
 
 /**
@@ -134,6 +136,8 @@ public class Perfil extends Fragment {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             aceptar();
+                            Intent i = new Intent(getContext(), LoginActivity.class);
+                            getContext().startActivity(i);
                         }
                     }).setNegativeButton("NO", new DialogInterface.OnClickListener() {
                         @Override

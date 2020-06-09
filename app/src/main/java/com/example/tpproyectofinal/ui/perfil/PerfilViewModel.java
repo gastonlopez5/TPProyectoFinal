@@ -85,9 +85,7 @@ public class PerfilViewModel extends AndroidViewModel {
                 @Override
                 public void onResponse(Call<Propietario> call, Response<Propietario> response) {
                     if (response.isSuccessful()){
-                        Intent i = new Intent(context, LoginActivity.class);
                         Toast.makeText(context, "Datos guardados correctamente!. Ingrese nuevamente.", Toast.LENGTH_LONG).show();
-                        context.startActivity(i);
                     }
                 }
 

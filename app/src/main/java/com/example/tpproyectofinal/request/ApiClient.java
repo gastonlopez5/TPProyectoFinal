@@ -3,9 +3,11 @@ package com.example.tpproyectofinal.request;
 import android.util.Log;
 
 import com.example.tpproyectofinal.modelos.Contrato;
+import com.example.tpproyectofinal.modelos.Inmueble;
 import com.example.tpproyectofinal.modelos.InmuebleFoto;
 import com.example.tpproyectofinal.modelos.Propietario;
 import com.example.tpproyectofinal.modelos.PropietarioFoto;
+import com.example.tpproyectofinal.modelos.TipoInmueble;
 import com.example.tpproyectofinal.modelos.Usuario;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -18,6 +20,7 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -54,11 +57,20 @@ public class ApiClient {
         @PUT("propietarios")
         Call<Propietario> actualizar(@Header("Authorization")String token, @Body Propietario p);
 
+        @PUT("inmuebles")
+        Call<Inmueble> actualizarInmueble(@Header("Authorization")String token, @Body Inmueble i);
+
         @GET("inmuebles")
         Call<ArrayList<InmuebleFoto>> listarInmuebles(@Header("Authorization")  String token);
 
+        @GET("tiposinmuebles")
+        Call<ArrayList<TipoInmueble>> tiposInmuebles(@Header("Authorization")  String token);
+
         @GET("contratos/{id}")
         Call<ArrayList<Contrato>> listarContratos(@Header("Authorization")  String token, @Path("id") int InmuebleId);
+
+        @DELETE("inmuebles/{id}")
+        Call<Inmueble> eliminarInmueble(@Header("Authorization")  String token, @Path("id") int InmuebleId);
 
         //listarClientes.php
         //@GET("listarClientes.php")

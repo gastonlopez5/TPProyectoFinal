@@ -12,6 +12,11 @@ public class TipoInmueble {
         this.tipo = tipo;
     }
 
+    @Override
+    public String toString() {
+        return tipo;
+    }
+
     public int getId() {
         return id;
     }

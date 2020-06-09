@@ -67,7 +67,7 @@ public class AdaptadorContrato extends RecyclerView.Adapter<AdaptadorContrato.Vi
         }
 
         public void asignarDatos(Contrato contrato) {
-            foto.setImageResource(contrato.getInmueble().getFoto());
+            //foto.setImageResource(contrato.getInmueble().getFoto());
             tvInquilino.setText(contrato.getInquilino().getApellido() + " " + contrato.getInquilino().getNombre());
             tvVencimiento.setText(contrato.getFechaFin());
         }

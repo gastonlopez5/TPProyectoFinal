@@ -88,7 +88,7 @@ public class DetalleContratoFragment extends Fragment {
         vm.getContratoMLD().observe(getViewLifecycleOwner(), new Observer<Contrato>() {
             @Override
             public void onChanged(Contrato contrato) {
-                foto.setImageResource(contrato.getInmueble().getFoto());
+                //foto.setImageResource(contrato.getInmueble().getFoto());
                 tvFechaFin.setText(contrato.getFechaFin());
                 tvFechaInicio.setText(contrato.getFechaInicio());
                 tvImporte.setText(contrato.getInporte()+ "");

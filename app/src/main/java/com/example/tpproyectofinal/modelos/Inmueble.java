@@ -3,7 +3,7 @@ package com.example.tpproyectofinal.modelos;
 import java.io.Serializable;
 import java.text.DecimalFormat;
 
-public class Inmueble implements Serializable {
+public class Inmueble {
     private int id;
     private String direccion;
     private int tipo;
@@ -12,14 +12,13 @@ public class Inmueble implements Serializable {
     private double costo;
     private Boolean disponible;
     private int propietarioId;
-    private int foto;
     private Propietario duenio;
     private TipoInmueble tipoInmueble;
 
     public Inmueble() {
     }
 
-    public Inmueble(int id, String direccion, int tipo, String uso, int ambientes, double costo, Boolean disponible, int propietarioId, int foto, Propietario duenio, TipoInmueble tipoInmueble) {
+    public Inmueble(int id, String direccion, int tipo, String uso, int ambientes, double costo, Boolean disponible, int propietarioId, Propietario duenio, TipoInmueble tipoInmueble) {
         this.id = id;
         this.direccion = direccion;
         this.tipo = tipo;
@@ -28,7 +27,6 @@ public class Inmueble implements Serializable {
         this.costo = costo;
         this.disponible = disponible;
         this.propietarioId = propietarioId;
-        this.foto = foto;
         this.duenio = duenio;
         this.tipoInmueble = tipoInmueble;
     }
@@ -95,14 +93,6 @@ public class Inmueble implements Serializable {
 
     public void setPropietarioId(int propietarioId) {
         this.propietarioId = propietarioId;
-    }
-
-    public int getFoto() {
-        return foto;
-    }
-
-    public void setFoto(int foto) {
-        this.foto = foto;
     }
 
     public Propietario getDuenio() {

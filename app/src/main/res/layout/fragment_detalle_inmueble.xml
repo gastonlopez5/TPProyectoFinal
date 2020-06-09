@@ -72,13 +72,14 @@
                             android:textColor="@color/headings"
                             android:textSize="13sp" />
 
-                        <TextView
+                        <EditText
                             android:id="@+id/tvDireccion"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-light"
                             android:textColor="#000000"
-                            android:textSize="18sp"/>
+                            android:textSize="18sp"
+                            android:enabled="false"/>
 
                         <View
                             android:layout_width="match_parent"
@@ -101,13 +102,14 @@
                             android:textColor="@color/headings"
                             android:textSize="13sp" />
 
-                        <TextView
+                        <EditText
                             android:id="@+id/tvUso"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-light"
                             android:textColor="#000000"
-                            android:textSize="18sp"/>
+                            android:textSize="18sp"
+                            android:enabled="false"/>
 
                         <View
                             android:layout_width="match_parent"
@@ -130,14 +132,15 @@
                             android:textColor="@color/headings"
                             android:textSize="13sp" />
 
-                        <TextView
+                        <EditText
                             android:id="@+id/tvAmbientes"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-light"
                             android:textColor="#000000"
                             android:textSize="18sp"
-                            android:inputType="number"/>
+                            android:inputType="number"
+                            android:enabled="false"/>
 
                         <View
                             android:layout_width="match_parent"
@@ -160,13 +163,54 @@
                             android:textColor="@color/headings"
                             android:textSize="13sp" />
 
-                        <TextView
+                        <EditText
                             android:id="@+id/tvCosto"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-light"
                             android:textColor="#000000"
-                            android:textSize="18sp"/>
+                            android:textSize="18sp"
+                            android:enabled="false"/>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="15dp"
+                            android:background="@color/grey" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Tipo"
+                            android:textColor="@color/headings"
+                            android:textSize="13sp" />
+
+                        <EditText
+                            android:id="@+id/tvTipo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-light"
+                            android:textColor="#000000"
+                            android:textSize="18sp"
+                            android:enabled="false"
+                            android:visibility="visible"/>
+
+                        <Spinner
+                            android:id="@+id/spTipo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-light"
+                            android:textColor="#000000"
+                            android:textSize="18sp"
+                            android:visibility="invisible"/>
 
                         <View
                             android:layout_width="match_parent"
@@ -205,10 +249,18 @@
                 </LinearLayout>
 
                 <Button
-                    android:id="@+id/btEditar"
+                android:id="@+id/btEditar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Actualizar"
+                android:layout_below="@+id/grupo"
+                android:layout_centerHorizontal="true"/>
+
+                <Button
+                    android:id="@+id/btEliminar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Actualizar"
+                    android:text="Eliminar"
                     android:layout_below="@+id/grupo"
                     android:layout_centerHorizontal="true"/>
 
