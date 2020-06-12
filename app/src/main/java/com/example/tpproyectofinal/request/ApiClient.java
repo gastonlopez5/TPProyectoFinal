@@ -5,6 +5,7 @@ import android.util.Log;
 import com.example.tpproyectofinal.modelos.Contrato;
 import com.example.tpproyectofinal.modelos.Inmueble;
 import com.example.tpproyectofinal.modelos.InmuebleFoto;
+import com.example.tpproyectofinal.modelos.Mensaje;
 import com.example.tpproyectofinal.modelos.Propietario;
 import com.example.tpproyectofinal.modelos.PropietarioFoto;
 import com.example.tpproyectofinal.modelos.TipoInmueble;
@@ -30,7 +31,7 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public class ApiClient {
-    private static final String PATH="http://192.168.1.102:45455/api/";
+    private static final String PATH="http://192.168.0.8:45455/api/";
     private static  MyApiInterface myApiInteface;
 
     public static MyApiInterface getMyApiClient(){
@@ -70,7 +71,7 @@ public class ApiClient {
         Call<ArrayList<Contrato>> listarContratos(@Header("Authorization")  String token, @Path("id") int InmuebleId);
 
         @DELETE("inmuebles/{id}")
-        Call<Inmueble> eliminarInmueble(@Header("Authorization")  String token, @Path("id") int InmuebleId);
+        Call<Mensaje> eliminarInmueble(@Header("Authorization")  String token, @Path("id") int InmuebleId);
 
         //listarClientes.php
         //@GET("listarClientes.php")

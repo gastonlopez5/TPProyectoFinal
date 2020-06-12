@@ -34,7 +34,7 @@ public class PerfilViewModel extends AndroidViewModel {
     MutableLiveData<String> msgLD;
     private PropietarioFoto propietarioFoto = null;
     private Bitmap bitmap;
-    private String PATH="http://192.168.1.102:45455";
+    private String PATH="http://192.168.0.8:45455";
 
     public PerfilViewModel(@NonNull Application application) {
         super(application);

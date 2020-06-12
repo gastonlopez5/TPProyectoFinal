@@ -18,6 +18,7 @@ import com.example.tpproyectofinal.modelos.Contrato;
 import com.example.tpproyectofinal.modelos.Inmueble;
 import com.example.tpproyectofinal.modelos.InmuebleFoto;
 import com.example.tpproyectofinal.modelos.Inquilino;
+import com.example.tpproyectofinal.modelos.Mensaje;
 import com.example.tpproyectofinal.modelos.Propietario;
 import com.example.tpproyectofinal.modelos.TipoInmueble;
 import com.example.tpproyectofinal.request.ApiClient;
@@ -112,19 +113,21 @@ public class DetalleInmuebleViewModel extends AndroidViewModel {
     }
 
     public void eliminarInmueble(int id){
-        Call<Inmueble> dato= ApiClient.getMyApiClient().eliminarInmueble(obtenerToken(), id);
-        dato.enqueue(new Callback<Inmueble>() {
+        Call<Mensaje> dato= ApiClient.getMyApiClient().eliminarInmueble(obtenerToken(), id);
+        dato.enqueue(new Callback<Mensaje>() {
             @Override
-            public void onResponse(Call<Inmueble> call, Response<Inmueble> response) {
+            public void onResponse(Call<Mensaje> call, Response<Mensaje> response) {
                 if (response.isSuccessful()){
-                    Toast.makeText(context, "Inmueble eliminado correctamente!", Toast.LENGTH_LONG).show();
+                    Mensaje msg = response.body();
+                    Toast.makeText(context, msg.getMsg(), Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(context, response.errorBody().toString(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "NO se puede eliminar el inmueble! Tiene contratos asociados", Toast.LENGTH_LONG).show();
                 }
+
             }
 
             @Override
-            public void onFailure(Call<Inmueble> call, Throwable t) {
+            public void onFailure(Call<Mensaje> call, Throwable t) {
                 Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
