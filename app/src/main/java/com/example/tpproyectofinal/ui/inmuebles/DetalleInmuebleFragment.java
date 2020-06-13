@@ -226,6 +226,7 @@ public class DetalleInmuebleFragment extends Fragment {
         inmueble.setCosto(Double.parseDouble(tvCosto.getText().toString()));
         inmueble.setDireccion(tvDireccion.getText().toString());
         inmueble.setDisponible(cbDisponible.isChecked());
+        inmueble.setUso(tvUso.getText().toString());
         inmueble.setTipoInmueble(seleccion);
         vm.actualizarInmueble(inmueble);
     }
