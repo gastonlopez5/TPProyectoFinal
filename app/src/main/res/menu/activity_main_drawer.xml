@@ -11,7 +11,11 @@
         <item
             android:id="@+id/nav_inmuebles"
             android:icon="@drawable/home"
-            android:title="Propiedades" />
+            android:title="Mis Propiedades" />
+        <item
+            android:id="@+id/alta_inmueble"
+            android:icon="@drawable/home"
+            android:title="Cargar Propiedad" />
         <item
             android:id="@+id/nav_inquilinos"
             android:icon="@drawable/inquilinos"

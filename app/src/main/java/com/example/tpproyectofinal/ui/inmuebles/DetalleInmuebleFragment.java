@@ -46,7 +46,7 @@ public class DetalleInmuebleFragment extends Fragment {
     private DetalleInmuebleViewModel vm;
     private InmuebleFoto inmuebleFotoVisto = null;
     private Inmueble inmueble = null;
-    private String PATH="http://192.168.1.102:45455";
+    private String PATH="http://192.168.0.8:45455";
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

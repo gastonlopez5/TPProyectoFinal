@@ -102,5 +102,10 @@
             android:id="@+id/action_detalleInquilinoFragment_to_inquilinosFragment"
             app:destination="@id/nav_inquilinos" />
     </fragment>
+    <fragment
+        android:id="@+id/alta_inmueble"
+        android:name="com.example.tpproyectofinal.ui.inmuebles.AltaInmuebleFragment"
+        android:label="fragment_alta_inmueble"
+        tools:layout="@layout/fragment_alta_inmueble" />
 
 </navigation>

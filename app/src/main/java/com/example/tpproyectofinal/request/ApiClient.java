@@ -52,6 +52,9 @@ public class ApiClient {
         @POST("propietarios/login")
         Call<String> login(@Body Usuario user);
 
+        @POST("inmuebles")
+        Call<InmuebleFoto> altaInmueble(@Header("Authorization")String token, @Body Inmueble inmueble);
+
         @GET("propietarios")
         Call<PropietarioFoto> perfil(@Header("Authorization")  String token);
 
